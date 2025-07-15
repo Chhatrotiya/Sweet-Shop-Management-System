@@ -1,0 +1,18 @@
+class SweetShop {
+  constructor() {
+    this.sweets = new Map();
+  }
+
+  addSweet(sweet) {
+    if (this.sweets.has(sweet.id)) {
+      throw new Error('Sweet with this ID already exists');
+    }
+    this.sweets.set(sweet.id, sweet);
+  }
+
+  getSweetById(id) {
+    return this.sweets.get(id);
+  }
+}
+
+module.exports = SweetShop;
