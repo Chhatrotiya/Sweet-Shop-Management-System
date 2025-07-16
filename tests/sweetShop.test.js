@@ -116,3 +116,23 @@ describe('Purchase Sweets', () => {
   });
 });
 
+
+describe('Restock Sweets', () => {
+  let shop;
+
+  beforeEach(() => {
+    shop = new SweetShop();
+    shop.addSweet(new Sweet(1001, 'Kaju Katli', 'Nut-Based', 50, 20));
+  });
+
+  test('should increase quantity when restocking sweets', () => {
+    shop.restockSweet(1001, 10);
+    const sweet = shop.getSweetById(1001);
+    expect(sweet.quantity).toBe(30);
+  });
+
+  test('should throw an error if sweet does not exist', () => {
+    expect(() => shop.restockSweet(9999, 5)).toThrow('Sweet not found');
+  });
+});
+
