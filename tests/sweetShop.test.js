@@ -136,3 +136,38 @@ describe('Restock Sweets', () => {
   });
 });
 
+describe('Sort Sweets', () => {
+  let shop;
+
+  beforeEach(() => {
+    shop = new SweetShop();
+    shop.addSweet(new Sweet(1003, 'Gulab Jamun', 'Milk-Based', 10, 50));
+    shop.addSweet(new Sweet(1002, 'Gajar Halwa', 'Vegetable-Based', 30, 15));
+    shop.addSweet(new Sweet(1001, 'Kaju Katli', 'Nut-Based', 50, 20));
+  });
+
+  test('should sort sweets by name', () => {
+    const sorted = shop.sortSweetsBy('name');
+    expect(sorted.map(s => s.name)).toEqual(['Gajar Halwa', 'Gulab Jamun', 'Kaju Katli']);
+  });
+
+  test('should sort sweets by category', () => {
+    const sorted = shop.sortSweetsBy('category');
+    expect(sorted.map(s => s.category)).toEqual(['Milk-Based', 'Nut-Based', 'Vegetable-Based']);
+  });
+
+  test('should sort sweets by price', () => {
+    const sorted = shop.sortSweetsBy('price');
+    expect(sorted.map(s => s.price)).toEqual([10, 30, 50]);
+  });
+
+  test('should sort sweets by quantity', () => {
+    const sorted = shop.sortSweetsBy('quantity');
+    expect(sorted.map(s => s.quantity)).toEqual([15, 20, 50]);
+  });
+
+  test('should throw an error for invalid sort key', () => {
+    expect(() => shop.sortSweetsBy('invalid')).toThrow('Invalid sort key');
+  });
+});
+
