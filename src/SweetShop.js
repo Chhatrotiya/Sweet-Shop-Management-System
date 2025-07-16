@@ -21,6 +21,11 @@ class SweetShop {
   this.sweets.delete(id);
 }
 
+getAllSweets() {
+  return Array.from(this.sweets.values());
+}
+
+
 }
 
 module.exports = SweetShop;
