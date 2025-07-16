@@ -35,3 +35,26 @@ describe('Delete Sweet', () => {
     expect(() => shop.deleteSweet(9999)).toThrow('Sweet not found');
   });
 });
+
+
+describe('View Sweets', () => {
+  test('should return all sweets in the shop', () => {
+    const shop = new SweetShop();
+    const sweet1 = new Sweet(1001, 'Kaju Katli', 'Nut-Based', 50, 20);
+    const sweet2 = new Sweet(1002, 'Gajar Halwa', 'Vegetable-Based', 30, 15);
+
+    shop.addSweet(sweet1);
+    shop.addSweet(sweet2);
+
+    const allSweets = shop.getAllSweets();
+    expect(allSweets.length).toBe(2);
+    expect(allSweets[0].name).toBe('Kaju Katli');
+    expect(allSweets[1].name).toBe('Gajar Halwa');
+  });
+
+  test('should return an empty list if no sweets are added', () => {
+    const shop = new SweetShop();
+    const allSweets = shop.getAllSweets();
+    expect(allSweets).toEqual([]);
+  });
+});
