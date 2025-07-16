@@ -60,6 +60,19 @@ restockSweet(id, quantity) {
   }
   sweet.quantity += quantity;
 }
+sortSweetsBy(field) {
+  const validFields = ['name', 'category', 'price', 'quantity'];
+  if (!validFields.includes(field)) {
+    throw new Error('Invalid sort key');
+  }
+
+  return Array.from(this.sweets.values()).sort((a, b) => {
+    if (typeof a[field] === 'string') {
+      return a[field].localeCompare(b[field]);
+    }
+    return a[field] - b[field];
+  });
+}
 
 
 }
