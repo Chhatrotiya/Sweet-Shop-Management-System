@@ -58,3 +58,37 @@ describe('View Sweets', () => {
     expect(allSweets).toEqual([]);
   });
 });
+
+
+describe('Search Sweets', () => {
+  let shop;
+
+  beforeEach(() => {
+    shop = new SweetShop();
+    shop.addSweet(new Sweet(1001, 'Kaju Katli', 'Nut-Based', 50, 20));
+    shop.addSweet(new Sweet(1002, 'Gajar Halwa', 'Vegetable-Based', 30, 15));
+    shop.addSweet(new Sweet(1003, 'Gulab Jamun', 'Milk-Based', 10, 50));
+  });
+
+  test('should find sweets by name (partial match)', () => {
+    const results = shop.searchByName('Katli');
+    expect(results.length).toBe(1);
+    expect(results[0].name).toBe('Kaju Katli');
+  });
+
+  test('should find sweets by category', () => {
+    const results = shop.searchByCategory('Milk-Based');
+    expect(results.length).toBe(1);
+    expect(results[0].name).toBe('Gulab Jamun');
+  });
+
+  test('should find sweets within a price range', () => {
+    const results = shop.searchByPriceRange(10, 40);
+    expect(results.length).toBe(2); // Gajar Halwa and Gulab Jamun
+  });
+
+  test('should return empty array if no match found', () => {
+    const results = shop.searchByName('Ladoo');
+    expect(results).toEqual([]);
+  });
+});
