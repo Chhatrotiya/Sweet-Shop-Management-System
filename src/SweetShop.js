@@ -25,6 +25,23 @@ getAllSweets() {
   return Array.from(this.sweets.values());
 }
 
+searchByName(name) {
+  return Array.from(this.sweets.values()).filter(sweet =>
+    sweet.name.toLowerCase().includes(name.toLowerCase())
+  );
+}
+
+searchByCategory(category) {
+  return Array.from(this.sweets.values()).filter(sweet =>
+    sweet.category.toLowerCase() === category.toLowerCase()
+  );
+}
+
+searchByPriceRange(min, max) {
+  return Array.from(this.sweets.values()).filter(sweet =>
+    sweet.price >= min && sweet.price <= max
+  );
+}
 
 }
 
