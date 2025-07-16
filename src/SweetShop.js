@@ -13,6 +13,14 @@ class SweetShop {
   getSweetById(id) {
     return this.sweets.get(id);
   }
+
+  deleteSweet(id) {
+  if (!this.sweets.has(id)) {
+    throw new Error('Sweet not found');
+  }
+  this.sweets.delete(id);
+}
+
 }
 
 module.exports = SweetShop;
