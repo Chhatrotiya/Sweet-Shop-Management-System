@@ -43,6 +43,18 @@ searchByPriceRange(min, max) {
   );
 }
 
+purchaseSweet(id, quantity) {
+  const sweet = this.sweets.get(id);
+  if (!sweet) {
+    throw new Error('Sweet not found');
+  }
+  if (sweet.quantity < quantity) {
+    throw new Error('Insufficient stock');
+  }
+  sweet.quantity -= quantity;
+}
+
+
 }
 
 module.exports = SweetShop;
