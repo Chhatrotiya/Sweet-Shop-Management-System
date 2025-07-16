@@ -19,3 +19,19 @@ describe('Add Sweet', () => {
 });
 
 });
+
+
+describe('Delete Sweet', () => {
+  test('should delete a sweet by ID', () => {
+    const shop = new SweetShop();
+    const sweet = new Sweet(1002, 'Gajar Halwa', 'Vegetable-Based', 30, 15);
+    shop.addSweet(sweet);
+    shop.deleteSweet(1002);
+    expect(shop.getSweetById(1002)).toBeUndefined();
+  });
+
+  test('should throw an error when trying to delete a non-existent sweet', () => {
+    const shop = new SweetShop();
+    expect(() => shop.deleteSweet(9999)).toThrow('Sweet not found');
+  });
+});
