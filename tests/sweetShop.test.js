@@ -92,3 +92,27 @@ describe('Search Sweets', () => {
     expect(results).toEqual([]);
   });
 });
+
+describe('Purchase Sweets', () => {
+  let shop;
+
+  beforeEach(() => {
+    shop = new SweetShop();
+    shop.addSweet(new Sweet(1001, 'Kaju Katli', 'Nut-Based', 50, 20));
+  });
+
+  test('should reduce quantity when sweet is purchased', () => {
+    shop.purchaseSweet(1001, 5);
+    const sweet = shop.getSweetById(1001);
+    expect(sweet.quantity).toBe(15);
+  });
+
+  test('should throw an error if not enough stock is available', () => {
+    expect(() => shop.purchaseSweet(1001, 25)).toThrow('Insufficient stock');
+  });
+
+  test('should throw an error if sweet does not exist', () => {
+    expect(() => shop.purchaseSweet(9999, 1)).toThrow('Sweet not found');
+  });
+});
+
